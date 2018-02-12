@@ -1,0 +1,164 @@
+{
+  "account" : "/Compute-a484905/default",
+  "description" : "",
+  "tags" : [ ],
+  "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+  "objects" : [ {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : false,
+    "template" : {
+      "networking" : {
+        "eth0" : {
+          "vnic" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_eth0",
+          "ipnetwork" : "{{test_sorin_with_ansible_IPNetwork_eth0:name}}",
+          "is_default_gateway" : true,
+          "nat" : [ "network/v1/ipreservation:{{test_sorin_with_ansible_IP_eth0_public:name}}", "network/v1/ipreservation:{{test_sorin_with_ansible_IP_eth0_cloud:name}}" ],
+          "vnicsets" : [ "{{test_sorin_with_ansible_VnicSet:name}}" ]
+        }
+      },
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+      "boot_order" : [ 1 ],
+      "storage_attachments" : [ {
+        "volume" : "{{test_sorin_with_ansible_storage_1:name}}",
+        "index" : 1
+      } ],
+      "label" : "test_sorin_with_ansible",
+      "shape" : "oc3",
+      "imagelist" : "/oracle/public/OL_7.2_UEKR4_x86_64",
+      "sshkeys" : [ "/Compute-a484905/sorin.miroiu@logika.ro/sorin_key" ]
+    },
+    "label" : "test_sorin_with_ansible_instance",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "Instance",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/instance"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "enabledFlag" : true,
+      "description" : "test_sorin_with_ansible Access Control List",
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_AccessControlList",
+      "tags" : [ "test_sorin_with_ansible" ]
+    },
+    "label" : "test_sorin_with_ansible_AccessControlList",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "Acl",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/04181e4b-13b5-4472-9366-0870fc14dfc6"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "ipAddressPool" : "/oracle/public/public-ippool",
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_IP_eth0_public"
+    },
+    "label" : "test_sorin_with_ansible_IP_eth0_public",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "IpAddressReservation",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/80daeaf1-b8bb-4dac-883a-1c143c775922"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "appliedAcls" : [ "{{test_sorin_with_ansible_AccessControlList:name}}" ],
+      "description" : "test_sorin_with_ansible Virtual NIC Set",
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_VnicSet",
+      "tags" : [ "test_sorin_with_ansible" ]
+    },
+    "label" : "test_sorin_with_ansible_VnicSet",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "VirtualNicSet",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/7efacb12-7812-4123-97bd-9333beed8d2c"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "description" : "test_sorin_with_ansible Security Rule (IP Network)",
+      "tags" : [ "test_sorin_with_ansible" ],
+      "flowDirection" : "ingress",
+      "acl" : "{{test_sorin_with_ansible_AccessControlList:name}}",
+      "enabledFlag" : true,
+      "secProtocols" : [ "/oracle/public/ssh" ],
+      "dstVnicSet" : "{{test_sorin_with_ansible_VnicSet:name}}",
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_SecurityRule"
+    },
+    "label" : "test_sorin_with_ansible_SecurityRule",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "SecurityRule",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/fc8308a7-7cf1-41cb-b882-32d0cf357d3e"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "description" : "test_sorin_with_ansible Security Rule (IP Network) Egress",
+      "tags" : [ "test_sorin_with_ansible" ],
+      "flowDirection" : "egress",
+      "acl" : "{{test_sorin_with_ansible_AccessControlList:name}}",
+      "enabledFlag" : true,
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_SecurityRule_Egress"
+    },
+    "label" : "test_sorin_with_ansible_SecurityRule_Egress",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "SecurityRule",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/9cb51f12-d0b6-4a12-bf3f-81b9c967bf11"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_IPNetwork_eth0",
+      "description" : "test_sorin_with_ansible IP Network",
+      "ipAddressPrefix" : "192.168.1.0/24",
+      "tags" : [ "test_sorin_with_ansible" ]
+    },
+    "label" : "test_sorin_with_ansible_IPNetwork_eth0",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "IpNetwork",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/fb4d2b9b-57a7-43d8-ab5b-a43851e70ae9"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "ipAddressPool" : "/oracle/public/cloud-ippool",
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_IP_eth0_cloud"
+    },
+    "label" : "test_sorin_with_ansible_IP_eth0_cloud",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "IpAddressReservation",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/770c8420-37a5-42ad-9924-049aaf72cb8e"
+  }, {
+    "account" : "/Compute-a484905/default",
+    "desired_state" : "inherit",
+    "description" : "",
+    "persistent" : true,
+    "template" : {
+      "managed" : true,
+      "description" : "test_sorin_with_ansible Storage Volume",
+      "bootable" : true,
+      "shared" : false,
+      "imagelist" : "/oracle/public/OL_7.2_UEKR4_x86_64",
+      "size" : "128G",
+      "properties" : [ "/oracle/public/storage/default" ],
+      "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible_storage"
+    },
+    "label" : "test_sorin_with_ansible_storage_1",
+    "orchestration" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible",
+    "type" : "StorageVolume",
+    "name" : "/Compute-a484905/sorin.miroiu@logika.ro/test_sorin_with_ansible/storage_1"
+  } ],
+  "desired_state" : "active"
+}

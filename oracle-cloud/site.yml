@@ -1,0 +1,10 @@
+---
+
+# This playbook deploys a simple standalone Tomcat 7 server.
+
+- hosts: cloud-servers
+  gather_facts: False
+  remote_user: root 
+
+  roles:
+    - cloud

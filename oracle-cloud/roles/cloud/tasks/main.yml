@@ -1,0 +1,51 @@
+---
+
+- name: Get the runtime date
+  shell: "date +%Y%m%d_%H%M%S"
+  register: tstamp
+ 
+- name: Set variables
+  set_fact:
+    current_timestamp: "{{ tstamp.stdout }}" 
+
+- name: Authenticate
+  uri: 
+    url: https://api-z41.compute.em3.oraclecloud.com/authenticate/
+    method: POST
+    body: '{"user":"/Compute-a484905/sorin.miroiu@logika.ro","password":"ZXCasdqwe123"}'
+    headers:
+       Content-type: "application/oracle-compute-v3+json"
+    validate_certs: no
+    status_code: 204
+  register: auth_cookie
+
+- name: Get Orchestrations
+  uri:
+    url: https://api-z41.compute.em3.oraclecloud.com/orchestration/Compute-a484905/
+    method: GET
+    headers:
+       Accept: "application/oracle-compute-v3+json"
+       Cookie: "{{ auth_cookie.set_cookie }}"
+
+- name: Create Orchestration
+  uri:
+    url: https://api-z41.compute.em3.oraclecloud.com/orchestration/Compute-a484905/
+    method: POST
+    validate_certs: no
+    headers:
+       Content-type: "application/oracle-compute-v3+json"
+       Accept: "application/oracle-compute-v3+json"
+       Cookie: "{{ auth_cookie.set_cookie }}"
+    body: "@orch_template.json"
+
+- name: Start Orchestration
+  uri:
+    url: https://api-z41.compute.em3.oraclecloud.com/orchestration/Compute-a484905/{{ orch_name }}?action=START
+    method: POST
+    validate_certs: no
+    headers:
+       Content-type: "application/oracle-compute-v3+json"
+       Accept: "application/oracle-compute-v3+json"
+       Cookie: "{{ auth_cookie.set_cookie }}"
+    body: "@orch_template.json"
+
