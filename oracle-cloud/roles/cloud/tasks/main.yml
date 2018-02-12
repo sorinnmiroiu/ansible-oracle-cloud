@@ -1,13 +1,5 @@
 ---
 
-- name: Get the runtime date
-  shell: "date +%Y%m%d_%H%M%S"
-  register: tstamp
- 
-- name: Set variables
-  set_fact:
-    current_timestamp: "{{ tstamp.stdout }}" 
-
 - name: Authenticate
   uri: 
     url: "{{ restpoint_url }}/authenticate/"
