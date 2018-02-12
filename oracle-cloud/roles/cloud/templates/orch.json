@@ -1,0 +1,28 @@
+{
+ "relationships": [],
+ "account": "/Compute-a484905/default",
+ "description": "simple orchestration with ansible",
+ "schedule": {"start_time": null, "stop_time": null},
+ "uri": null,
+ "oplans": [
+     {
+      "status": "unknown",
+      "info": {},
+      "obj_type": "launchplan",
+      "ha_policy": "active",
+      "label": "webserver_lp",
+      "objects": [
+         {
+          "instances": [
+               {"shape": "oc3", 
+                "label": "primary_webserver",
+                "imagelist" : "/oracle/public/OL_7.2_UEKR4_x86_64",
+                "name": "/Compute-a484905/sorin.miroiu@logika.ro/{{ orch_name }}"
+               }
+                       ]
+        }
+   ]
+  }
+ ],
+ "name": "/Compute-a484905/sorin.miroiu@logika.ro/{{ orch_name }}"
+}

@@ -36,16 +36,19 @@
        Content-type: "application/oracle-compute-v3+json"
        Accept: "application/oracle-compute-v3+json"
        Cookie: "{{ auth_cookie.set_cookie }}"
-    body: "@orch_template.json"
+    body: "{{ lookup('template', 'orch.json') }}"
+    return_content: yes
+  register: orchestration_creation_details
 
 - name: Start Orchestration
   uri:
     url: https://api-z41.compute.em3.oraclecloud.com/orchestration/Compute-a484905/{{ orch_name }}?action=START
-    method: POST
+    method: PUT
     validate_certs: no
     headers:
        Content-type: "application/oracle-compute-v3+json"
        Accept: "application/oracle-compute-v3+json"
        Cookie: "{{ auth_cookie.set_cookie }}"
-    body: "@orch_template.json"
+    return_content: yes
+  register: orchestration_start_details
 
