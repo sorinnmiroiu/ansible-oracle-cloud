@@ -15,23 +15,27 @@
 
 - name: Get Orchestrations
   uri:
-    url: "{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/"
+    url: '{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/'
     method: GET
     headers:
        Accept: "application/oracle-compute-v3+json"
        Cookie: "{{ auth_cookie.set_cookie }}"
 
+- debug: msg="{{ lookup('template', 'orch.json') }}"
+
 - name: Create Orchestration
   uri:
-    url: "{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/"
+    url: '{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/'
     method: POST
     validate_certs: no
     headers:
        Content-type: "application/oracle-compute-v3+json"
        Accept: "application/oracle-compute-v3+json"
        Cookie: "{{ auth_cookie.set_cookie }}"
+    body_format: json
     body: "{{ lookup('template', 'orch.json') }}"
     return_content: yes
+    status_code: 201
   register: orchestration_creation_details
 
 - name: Start Orchestration

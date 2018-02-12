@@ -1,6 +1,6 @@
 {
  "relationships": [],
- "account": "/Compute-a484905/default",
+ "account": "/Compute-{{ id_domain }}/default",
  "description": "simple orchestration with ansible",
  "schedule": {"start_time": null, "stop_time": null},
  "uri": null,
@@ -17,12 +17,12 @@
                {"shape": "oc3", 
                 "label": "primary_webserver",
                 "imagelist" : "/oracle/public/OL_7.2_UEKR4_x86_64",
-                "name": "/Compute-a484905/sorin.miroiu@logika.ro/{{ orch_name }}"
+                "name": "{{ username }}/{{ orch_name }}"
                }
                        ]
         }
    ]
   }
  ],
- "name": "/Compute-a484905/sorin.miroiu@logika.ro/{{ orch_name }}"
+ "name": "{{ username }}/{{ orch_name }}"
 }
