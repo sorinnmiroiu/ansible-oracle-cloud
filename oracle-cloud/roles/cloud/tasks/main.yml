@@ -38,9 +38,11 @@
     status_code: 201
   register: orchestration_creation_details
 
+- debug: var=orchestration_creation_details
+
 - name: Start Orchestration
   uri:
-    url: "{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/{{ orch_name }}?action=START"
+    url: "{{ restpoint_url }}/orchestration/{{ username }}/{{ orch_name }}?action=START"
     method: PUT
     validate_certs: no
     headers:
