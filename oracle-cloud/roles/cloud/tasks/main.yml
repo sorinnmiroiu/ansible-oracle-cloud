@@ -12,7 +12,7 @@
   uri: 
     url: https://api-z41.compute.em3.oraclecloud.com/authenticate/
     method: POST
-    body: '{"user":"/Compute-a484905/sorin.miroiu@logika.ro","password":"ZXCasdqwe123"}'
+    body: '{"user":"{{ username }}","password":"{{ password }}"}'
     headers:
        Content-type: "application/oracle-compute-v3+json"
     validate_certs: no
