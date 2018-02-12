@@ -10,7 +10,7 @@
 
 - name: Authenticate
   uri: 
-    url: {{ restpoint_url }}/authenticate/
+    url: "{{ restpoint_url }}/authenticate/"
     method: POST
     body: '{"user":"{{ username }}","password":"{{ password }}"}'
     headers:
@@ -21,7 +21,7 @@
 
 - name: Get Orchestrations
   uri:
-    url: {{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/
+    url: "{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/"
     method: GET
     headers:
        Accept: "application/oracle-compute-v3+json"
@@ -29,7 +29,7 @@
 
 - name: Create Orchestration
   uri:
-    url: {{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/
+    url: "{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/"
     method: POST
     validate_certs: no
     headers:
@@ -42,7 +42,7 @@
 
 - name: Start Orchestration
   uri:
-    url: {{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/{{ orch_name }}?action=START
+    url: "{{ restpoint_url }}/orchestration/Compute-{{ id_domain }}/{{ orch_name }}?action=START"
     method: PUT
     validate_certs: no
     headers:
