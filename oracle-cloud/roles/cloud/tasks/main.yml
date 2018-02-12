@@ -1,10 +1,12 @@
 ---
+#- debug: msg="{{ lookup('template', 'auth_body.json') }}"
 
 - name: Authenticate
   uri: 
-    url: "{{ restpoint_url }}/authenticate/"
+    url: '{{ restpoint_url }}/authenticate/'
     method: POST
-    body: '{"user":"{{ username }}","password":"{{ password }}"}'
+    body_format: json
+    body: "{{ lookup('template', 'auth_body.json') }}"
     headers:
        Content-type: "application/oracle-compute-v3+json"
     validate_certs: no
