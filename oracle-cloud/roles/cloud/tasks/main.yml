@@ -42,7 +42,7 @@
 
 - name: Start Orchestration
   uri:
-    url: "{{ restpoint_url }}/orchestration/{{ username }}/{{ orch_name }}?action=START"
+    url: "{{ restpoint_url }}/orchestration{{ username }}/{{ orch_name }}?action=START"
     method: PUT
     validate_certs: no
     headers:
